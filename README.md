@@ -1,5 +1,10 @@
 # FibonacciSequence_Android
 
+## 目的
+javaとNDK(C)とScalaによる計算時間比較のため、
+フィボナッチ数列の計算時間を計測し、
+それぞれの言語で計算時間を比較することを目的としたAndroid Projectである。
+
 ## 動作環境
 ### local
 Mac OS X : 10.10.4
@@ -14,7 +19,3 @@ Groovy : 2.3.6
 
 gcc : 4.2.1
 
-## 目的
-javaとNDKとScalaによる計算時間比較のため、
-フィボナッチ数列の計算時間を計測し、それをそれぞれの言語で計算して
-比較することを目的としたAndroid Projectである。
