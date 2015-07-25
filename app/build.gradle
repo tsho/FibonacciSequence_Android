@@ -10,7 +10,16 @@ android {
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
+
+        ndk {
+            moduleName "hello-jni"
+            stl "gnustl_shared"
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+            ldLibs "log"
+        }
+
     }
+
     buildTypes {
         release {
             minifyEnabled false

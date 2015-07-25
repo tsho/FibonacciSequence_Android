@@ -25,6 +25,11 @@ public class MainActivity extends ActionBarActivity {
     private long startTime;
     private long elapsedTime = 0l;
 
+    static {
+        System.loadLibrary("hello-jni");
+    }
+
+    public native String stringFromNative();
 
 
     @Override
@@ -37,6 +42,11 @@ public class MainActivity extends ActionBarActivity {
         javaTimerLabel = (TextView) findViewById(R.id.javaCountTimerLabel);
 
         cCountBtn = (Button)findViewById(R.id.cCountButton);
+
+        TextView tvCCountResult = (TextView) findViewById(R.id.cCountResult);
+        tvCCountResult.setText(stringFromNative());
+
+
     }
 
     @Override
