@@ -1,6 +1,5 @@
 package com.tsho.fibonaccisequence;
 
-import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
@@ -20,18 +19,15 @@ public class MainActivity extends ActionBarActivity {
     private TextView javaCountTimerLabel;
     private TextView cCountTimerLabel;
 
-    private Runnable updateTimer, calculateFibonacci;
     private Handler handler = new Handler();
 
     private long startTime;
     private long elapsedTime = 0l;
 
-    private int fibonacciTarget = 40;
-
-    private int iii;
+    private int fibonacciTarget = 43;
 
     static {
-        System.loadLibrary("hello-jni");
+        System.loadLibrary("calcFibonacci");
     }
 
 //    public native String stringFromNative();
@@ -48,8 +44,6 @@ public class MainActivity extends ActionBarActivity {
         cCountBtn = (Button)findViewById(R.id.cCountButton);
         cCountTimerLabel = (TextView) findViewById(R.id.cCountTimerLabel);
 
-//        TextView tvCCountResult = (TextView) findViewById(R.id.cCountResult);
-//        tvCCountResult.setText(stringFromNative());
     }
 
     @Override
@@ -128,13 +122,6 @@ public class MainActivity extends ActionBarActivity {
 
         TextView tvCCountResult = (TextView) findViewById(R.id.cCountResult);
         tvCCountResult.setText(String.valueOf(calcFibonacciFromNDK(fibonacciTarget)));
-//        tvCCountResult.setText(String.valueOf(calcFibonacciFromNDK()));
-//        iii = calcFibonacciFromNDK();
-//        tvCCountResult.setText(stringFromNative());
-
-//        tvCCountResult.setText(String.valueOf(1));
-
-//      tvCCountResult.setText(String.valueOf(stringFromNative()));
 
         long t = SystemClock.elapsedRealtime() - startTime;
         SimpleDateFormat sdf = new SimpleDateFormat("mm:ss.SSS", Locale.JAPAN);
@@ -142,6 +129,4 @@ public class MainActivity extends ActionBarActivity {
 
         setButtonState(true, true);
     }
-
-
 }

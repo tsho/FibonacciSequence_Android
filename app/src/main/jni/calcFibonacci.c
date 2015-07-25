@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <android/log.h>
 
-#define TAG "hello-jni.c"
+#define TAG "calcFibonacci.c"
 
 unsigned long calcFibonacci(jint n)
 {
