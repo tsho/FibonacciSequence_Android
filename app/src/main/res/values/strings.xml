@@ -3,10 +3,11 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="javacount">Java count</string>
-    <string name="javacount_result">XXX</string>
-    <string name="javaTimerLabel">00:00:000</string>
-    <string name="ccount">C count</string>
-    <string name="ccounttime">00:00</string>
+    <string name="javaCountButton">Java count</string>
+    <string name="javaCountResult">XXX</string>
+    <string name="javaCountTimerLabel">00:00:000</string>
+    <string name="cCountButton">NDK count</string>
+    <string name="cCountTimerLabel">00:00:000</string>
+    <string name="cCountResult">XXX</string>
 
 </resources>

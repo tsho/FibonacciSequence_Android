@@ -16,7 +16,7 @@ import java.util.Locale;
 
 
 public class MainActivity extends ActionBarActivity {
-    private Button javacount_btn, ccount_btn;
+    private Button javaCountBtn, cCountBtn;
     private TextView javaTimerLabel;
 
     private Runnable updateTimer, calculateFibonacci;
@@ -31,12 +31,12 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        javacount_btn = (Button)findViewById(R.id.javacount);
+        javaCountBtn = (Button)findViewById(R.id.javaCountButton);
 //        javacount_btn.setOnClickListener(this);
 
-        javaTimerLabel = (TextView) findViewById(R.id.javaTimerLabel);
+        javaTimerLabel = (TextView) findViewById(R.id.javaCountTimerLabel);
 
-        ccount_btn = (Button)findViewById(R.id.ccount);
+        cCountBtn = (Button)findViewById(R.id.cCountButton);
     }
 
     @Override
@@ -62,15 +62,15 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void setButtonState(boolean java, boolean ndk) {
-        javacount_btn.setEnabled(java);
-        ccount_btn.setEnabled(ndk);
+        javaCountBtn.setEnabled(java);
+        cCountBtn.setEnabled(ndk);
     }
 
-    public void startTimer(View view) {
+    public void javaCalc(View view) {
         startTime = SystemClock.elapsedRealtime();
 
 
-        TextView tv = (TextView) findViewById(R.id.javacount_result);
+        TextView tv = (TextView) findViewById(R.id.javaCountResult);
         tv.setText(String.valueOf(calcFibonacci(40)));
 //        handler.removeCallbacks(updateTimer);
 
