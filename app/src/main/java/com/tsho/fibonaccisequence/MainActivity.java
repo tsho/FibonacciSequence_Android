@@ -17,7 +17,8 @@ import java.util.Locale;
 
 public class MainActivity extends ActionBarActivity {
     private Button javaCountBtn, cCountBtn;
-    private TextView javaTimerLabel;
+    private TextView javaCountTimerLabel;
+    private TextView cCountTimerLabel;
 
     private Runnable updateTimer, calculateFibonacci;
     private Handler handler = new Handler();
@@ -25,28 +26,30 @@ public class MainActivity extends ActionBarActivity {
     private long startTime;
     private long elapsedTime = 0l;
 
+    private int fibonacciTarget = 40;
+
+    private int iii;
+
     static {
         System.loadLibrary("hello-jni");
     }
 
-    public native String stringFromNative();
+//    public native String stringFromNative();
 
+    public native int calcFibonacciFromNDK(int fibonacciTarget);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         javaCountBtn = (Button)findViewById(R.id.javaCountButton);
-//        javacount_btn.setOnClickListener(this);
-
-        javaTimerLabel = (TextView) findViewById(R.id.javaCountTimerLabel);
+        javaCountTimerLabel = (TextView) findViewById(R.id.javaCountTimerLabel);
 
         cCountBtn = (Button)findViewById(R.id.cCountButton);
+        cCountTimerLabel = (TextView) findViewById(R.id.cCountTimerLabel);
 
-        TextView tvCCountResult = (TextView) findViewById(R.id.cCountResult);
-        tvCCountResult.setText(stringFromNative());
-
-
+//        TextView tvCCountResult = (TextView) findViewById(R.id.cCountResult);
+//        tvCCountResult.setText(stringFromNative());
     }
 
     @Override
@@ -76,17 +79,18 @@ public class MainActivity extends ActionBarActivity {
         cCountBtn.setEnabled(ndk);
     }
 
-    public void javaCalc(View view) {
+    public void startJavaCalc(View view) {
+        setButtonState(false, false);
         startTime = SystemClock.elapsedRealtime();
 
 
         TextView tv = (TextView) findViewById(R.id.javaCountResult);
-        tv.setText(String.valueOf(calcFibonacci(40)));
+        tv.setText(String.valueOf(calcFibonacci(fibonacciTarget)));
 //        handler.removeCallbacks(updateTimer);
 
         long t = SystemClock.elapsedRealtime() - startTime;
         SimpleDateFormat sdf = new SimpleDateFormat("mm:ss.SSS", Locale.JAPAN);
-        javaTimerLabel.setText(sdf.format(t));
+        javaCountTimerLabel.setText(sdf.format(t));
 
         setButtonState(true, true);
 
@@ -105,23 +109,7 @@ public class MainActivity extends ActionBarActivity {
 //        handler.postDelayed(updateTimer, 10);
 //        setButtonState(false, false);
 
-
     }
-
-/*
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.javacount:
-                TextView tv = (TextView) findViewById(R.id.javacount_result);
-                TextView tv2 = (TextView) findViewById(R.id.javaTimerLabel);
-                tv.setText(String.valueOf(calcFibonacci(40)));
-                tv2.setText("test");
-
-                break;
-        }
-
-    }
-*/
 
     public int calcFibonacci(int n) {
         if (n == 0) {
@@ -134,6 +122,26 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
+    public void startCCalc (View view) {
+        setButtonState(false, false);
+        startTime = SystemClock.elapsedRealtime();
+
+        TextView tvCCountResult = (TextView) findViewById(R.id.cCountResult);
+        tvCCountResult.setText(String.valueOf(calcFibonacciFromNDK(fibonacciTarget)));
+//        tvCCountResult.setText(String.valueOf(calcFibonacciFromNDK()));
+//        iii = calcFibonacciFromNDK();
+//        tvCCountResult.setText(stringFromNative());
+
+//        tvCCountResult.setText(String.valueOf(1));
+
+//      tvCCountResult.setText(String.valueOf(stringFromNative()));
+
+        long t = SystemClock.elapsedRealtime() - startTime;
+        SimpleDateFormat sdf = new SimpleDateFormat("mm:ss.SSS", Locale.JAPAN);
+        cCountTimerLabel.setText(sdf.format(t));
+
+        setButtonState(true, true);
+    }
 
 
 }

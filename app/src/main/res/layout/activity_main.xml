@@ -49,7 +49,7 @@
             android:layout_marginTop="10dp"
             android:text="@string/javaCountButton"
             android:textSize="24sp"
-            android:onClick="javaCalc"
+            android:onClick="startJavaCalc"
             />
     </LinearLayout>
 
