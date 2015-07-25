@@ -1,6 +1,8 @@
 package com.tsho.fibonaccisequence;
 
 import android.content.DialogInterface;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,16 +11,30 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener {
-    Button javacount_btn, ccount_btn;
+
+public class MainActivity extends ActionBarActivity {
+    private Button javacount_btn, ccount_btn;
+    private TextView javaTimerLabel;
+
+    private Runnable updateTimer, calculateFibonacci;
+    private Handler handler = new Handler();
+
+    private long startTime;
+    private long elapsedTime = 0l;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         javacount_btn = (Button)findViewById(R.id.javacount);
-        javacount_btn.setOnClickListener(this);
+//        javacount_btn.setOnClickListener(this);
+
+        javaTimerLabel = (TextView) findViewById(R.id.javaTimerLabel);
 
         ccount_btn = (Button)findViewById(R.id.ccount);
     }
@@ -45,17 +61,57 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
+    public void setButtonState(boolean java, boolean ndk) {
+        javacount_btn.setEnabled(java);
+        ccount_btn.setEnabled(ndk);
+    }
+
+    public void startTimer(View view) {
+        startTime = SystemClock.elapsedRealtime();
+
+
+        TextView tv = (TextView) findViewById(R.id.javacount_result);
+        tv.setText(String.valueOf(calcFibonacci(40)));
+//        handler.removeCallbacks(updateTimer);
+
+        long t = SystemClock.elapsedRealtime() - startTime;
+        SimpleDateFormat sdf = new SimpleDateFormat("mm:ss.SSS", Locale.JAPAN);
+        javaTimerLabel.setText(sdf.format(t));
+
+        setButtonState(true, true);
+
+/*        updateTimer = new Runnable() {
+            @Override
+            public void run () {
+                long t = SystemClock.elapsedRealtime();
+                SimpleDateFormat sdf = new SimpleDateFormat("mm:ss.SSS", Locale.JAPAN);
+                javaTimerLabel.setText(sdf.format(t));
+                handler.removeCallbacks(updateTimer);
+                handler.postDelayed(updateTimer, 10);
+            }
+        };
+*/
+
+//        handler.postDelayed(updateTimer, 10);
+//        setButtonState(false, false);
+
+
+    }
+
+/*
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.javacount:
                 TextView tv = (TextView) findViewById(R.id.javacount_result);
-                TextView tv2 = (TextView) findViewById(R.id.javacount_time);
+                TextView tv2 = (TextView) findViewById(R.id.javaTimerLabel);
                 tv.setText(String.valueOf(calcFibonacci(40)));
                 tv2.setText("test");
+
                 break;
         }
 
     }
+*/
 
     public int calcFibonacci(int n) {
         if (n == 0) {
